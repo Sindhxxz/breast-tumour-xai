@@ -1,0 +1,16 @@
+{
+  "accuracy": 0.8663164039696439,
+  "macro_f1": 0.8515659143875232,
+  "confusion_matrix": [
+    [
+      472,
+      196
+    ],
+    [
+      33,
+      1012
+    ]
+  ],
+  "report": "              precision    recall  f1-score   support\n\n      benign     0.9347    0.7066    0.8048       668\n   malignant     0.8377    0.9684    0.8984      1045\n\n    accuracy                         0.8663      1713\n   macro avg     0.8862    0.8375    0.8516      1713\nweighted avg     0.8755    0.8663    0.8619      1713\n",
+  "threshold": 0.35
+}

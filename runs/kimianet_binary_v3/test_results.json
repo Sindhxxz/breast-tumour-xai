@@ -1,0 +1,35 @@
+{
+  "test_metrics_v3_ensemble": {
+    "accuracy": 0.8243,
+    "macro_f1": 0.8211,
+    "threshold": 0.47,
+    "confusion_matrix": [[591, 77], [224, 821]],
+    "classification_report": {
+      "benign": {
+        "precision": 0.7252,
+        "recall": 0.8847,
+        "f1_score": 0.7970,
+        "support": 668
+      },
+      "malignant": {
+        "precision": 0.9143,
+        "recall": 0.7856,
+        "f1_score": 0.8451,
+        "support": 1045
+      },
+      "accuracy": 0.8243,
+      "macro_avg": {
+        "precision": 0.8197,
+        "recall": 0.8352,
+        "f1_score": 0.8211,
+        "support": 1713
+      },
+      "weighted_avg": {
+        "precision": 0.8405,
+        "recall": 0.8243,
+        "f1_score": 0.8263,
+        "support": 1713
+      }
+    }
+  }
+}
