@@ -145,7 +145,7 @@ To use KimiaNet in this project, you must first download the pre-trained weights
 **`KimiaNetPyTorchWeights.pth`**
 
 You can download the weights from the following source:
-📥 [KimiaNet Weights – Download Link](https://github.com/KimiaLabMayo/KimiaNet/tree/main/KimiaNet_Weights/weights)
+[KimiaNet Weights – Download Link](https://github.com/KimiaLabMayo/KimiaNet/tree/main/KimiaNet_Weights/weights)
 
 Once downloaded, place it in the directory:
 
@@ -193,10 +193,81 @@ breast-tumour-analysis-xai/
 
 ### Techniques Used:
 
-* **Grad-CAM** → Visualizes important regions influencing model predictions.
-* **LIME** → Generates local explanations for individual predictions.
+* **Grad-CAM** : Visualizes important regions influencing model predictions.
+* **LIME** : Generates local explanations for individual predictions.
 
 Helps in validating model reliability and improving transparency in clinical contexts.
+
+### Understanding Model Decisions
+
+To interpret model predictions, Explainable AI (XAI) techniques such as Grad-CAM and LIME were applied. These visualization methods reveal which regions of histopathology images influenced the model’s decision, enhancing interpretability and trust in the diagnostic process. First experimented on a single test image to interpret KimiaNet’s decision-making process using Grad-CAM and LIME. 
+
+```python
+src\gradcam_kimianet_singletest.py
+src\gradcam+lime_kimianet_singletest.py
+```
+
+### Step 1: Grad-CAM (Gradient-weighted Class Activation Mapping)
+
+Grad-CAM generates a heatmap over the input image, highlighting the most influential areas contributing to the prediction.
+
+In this analysis, a test image from the malignant class was processed through the trained KimiaNet model.
+The Grad-CAM output indicated that:
+
+* The model’s attention followed tissue patterns rather than background noise.
+
+* High-activation zones aligned with cellular and structural boundaries.
+
+Example Visualization:
+
+![Grad-CAM Visualization](runs/singletest_outputs/Grad-CAM.png)
+
+* The visualization confirms that the model focuses on clinically relevant regions.
+
+* The Grad-CAM heatmap shows smooth, spatially coherent regions of red/yellow overlay. These correspond to:
+
+* High-attention zones where the network’s feature maps have high activation.
+
+* In this case, those red/orange streaks follow dense epithelial glands with irregular, hyperchromatic nuclei—classic malignant morphology in ductal carcinoma.
+
+* Cooler regions (blue/purple) represent connective stroma or empty lumens, which are less diagnostically relevant.
+
+Conclusion: Grad-CAM is focusing on histologically meaningful tumor structures — a strong qualitative validation that the model’s attention aligns with true malignant regions.
+	
+### Step 2: LIME (Local Interpretable Model-Agnostic Explanations)
+
+LIME was used to further interpret model behavior on the same image. It perturbs image regions (superpixels) and analyzes their influence on prediction confidence.
+
+LIME divides the image into super-pixels and perturbs them to see which ones most change the prediction.
+
+Example Visualization:
+
+![GradCAM+LIME Visualization](runs/singletest_outputs/GradCAM+LIME.png)
+
+Here:
+
+* Yellow outlines encircle compact glandular clusters with high nuclear density.
+
+* The algorithm identifies multiple discrete “patches” within the malignant areas.
+
+* LIME’s selections overlap quite well with the high-intensity Grad-CAM regions, though they’re more fragmented — expected, since LIME operates at the patch level rather than via feature maps.
+
+Conclusion:
+LIME and Grad-CAM are consistent — both emphasize similar epithelial tumor zones rather than background tissue.
+This convergence increases confidence that the model isn’t relying on artifacts (like slide corners or staining intensity) but on morphologic cues actually indicative of malignancy.
+
+
+### Rationale for Single-Image Analysis
+
+The single-image analysis stage was performed to:
+
+* Validate the Grad-CAM and LIME visualization pipelines before applying them to all test samples.
+
+* Qualitatively assess focus areas and interpretability.
+
+* Ensure consistency in color maps, normalization, and visualization settings.
+
+After verification, the process was scaled to 40 test samples for a comprehensive evaluation of both benign and malignant categories.
 
 ---
 
