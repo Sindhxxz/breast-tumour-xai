@@ -271,12 +271,19 @@ After verification, the process was scaled to 40 test samples for a comprehensiv
 
 ---
 
-## Citation
+## Future Scope
 
-If you use this repository or the BreakHis dataset, please cite:
+* The project can be expanded to multi-class classification by incorporating additional breast tumour subtypes and larger datasets.
 
-> Spanhol, F.A., Oliveira, L.S., Petitjean, C., & Heutte, L.
-> "A Dataset for Breast Cancer Histopathological Image Classification."
-> *IEEE Transactions on Biomedical Engineering*, 2016.
+* Future models can aim to identify the exact malignant tumour type rather than just binary classification.
+
+* The outputs of all analyses (predictions) are stored in .json format under each runs/ folder, enabling further automated evaluation and visualization.
 
 ---
+
+## References
+
+* F. A. Spanhol, L. S. Oliveira, C. Petitjean and L. Heutte, "A Dataset for Breast Cancer Histopathological Image Classification," in IEEE Transactions on Biomedical Engineering, vol. 63, no. 7, pp. 1455-1462, July 2016, doi: 10.1109/TBME.2015.2496264.
+keywords: {Cancer;Microscopy;Databases;Histograms;Biopsy;Feature extraction;Malignant tumors;Breast cancer;histopathology;image classification;Medical imaging;Breast cancer;histopathology;image classification;medical imaging},
+
+* Alom, M.R., Farid, F.A., Rahaman, M.A. et al. An explainable AI-driven deep neural network for accurate breast cancer detection from histopathological and ultrasound images. Sci Rep 15, 17531 (2025). https://doi.org/10.1038/s41598-025-97718-5
