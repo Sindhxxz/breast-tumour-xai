@@ -1,8 +1,7 @@
 
 # Breast Tumour Analysis with Explainable AI (XAI)
 
-This project performs **breast tumour classification** using histopathological images and integrates **Explainable AI (Grad-CAM, LIME, SHAP)** to visualize and interpret model decisions.  
-It leverages the **BreakHis dataset** and deep learning architectures (CNNs / Vision Transformers) to build interpretable diagnostic systems.
+This project performs **breast tumour classification** using histopathological images and integrates **Explainable AI (Grad-CAM, LIME)** to visualize and interpret model decisions.  It leverages the **BreakHis dataset** and deep learning architectures (CNNs / Vision Transformers) to build interpretable diagnostic systems.
 
 ---
 
@@ -50,7 +49,7 @@ Example:
 
   * `torch`, `torchvision`
   * `scikit-learn`, `albumentations`
-  * `grad-cam`, `shap`, `lime`
+  * `grad-cam`, `lime`
   * `streamlit` (for deployment/visualization)
 
 ---
@@ -78,7 +77,7 @@ Example:
 
 ---
 
-### 🧠 Step 3: Dataset & DataLoader (PyTorch)
+### Step 3: Dataset & DataLoader (PyTorch)
 
 **Transforms**
 
@@ -126,6 +125,42 @@ Verified batch shape `[32, 3, 224, 224]` and correct label mapping.
 
 ---
 
+### Model Overview
+
+This project leverages **deep transfer learning** to classify breast tumor histopathological images into **benign** and **malignant** categories.
+Three pre-trained CNN architectures were evaluated and compared for performance:
+
+1. **ResNet-50** – served as a strong baseline model for feature extraction and binary classification.
+2. **DenseNet-121** – provided deeper gradient flow and improved feature reuse, achieving competitive accuracy and macro-F1 scores.
+3. **KimiaNet** – a specialized model pre-trained on large-scale **histopathology datasets**.
+
+   * Unlike generic ImageNet models, KimiaNet is trained to capture **microscopic tissue-level features**, making it highly effective for medical image analysis.
+   * In this project, KimiaNet demonstrated superior performance with an accuracy of **86.6%** and a macro-F1 score of **85.1%** on the test set.
+
+---
+
+### Using KimiaNet Weights
+
+To use KimiaNet in this project, you must first download the pre-trained weights file:
+**`KimiaNetPyTorchWeights.pth`**
+
+You can download the weights from the following source:
+📥 [KimiaNet Weights – Download Link](https://github.com/KimiaLabMayo/KimiaNet/tree/main/KimiaNet_Weights/weights)
+
+Once downloaded, place it in the directory:
+
+```
+weights/KimiaNetPyTorchWeights.pth
+```
+
+The model loading function will automatically load these weights during initialization:
+
+```python
+model = build_kimianet(weights_path="weights/KimiaNetPyTorchWeights.pth", num_classes=2)
+```
+
+---
+
 ## Folder Structure
 
 ```
@@ -145,7 +180,7 @@ breast-tumour-analysis-xai/
 │   ├── train.py
 │
 ├── weights/
-│   └── model.pt  # (ignored in .gitignore)
+│   └── model.pt  # (ignored in .gitignore)(kimianet weights)
 │
 ├── requirements.txt
 ├── .gitignore
@@ -165,7 +200,7 @@ Helps in validating model reliability and improving transparency in clinical con
 
 ---
 
-## 📚 Citation
+## Citation
 
 If you use this repository or the BreakHis dataset, please cite:
 
