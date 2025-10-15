@@ -60,7 +60,6 @@ Example:
 
 * Shuffle and split patients into **train/val/test = 70/10/20**.
 * Copy images into structured folders under `processed/`.
-* Generate `manifest.csv` containing metadata for all images.
 * Final counts:
 
   * **Train:** 5,463 images
