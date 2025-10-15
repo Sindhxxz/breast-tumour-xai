@@ -48,9 +48,8 @@ Example:
 * Key libraries:
 
   * `torch`, `torchvision`
-  * `scikit-learn`, `albumentations`
+  * `scikit-learn`, `pillow`
   * `grad-cam`, `lime`
-  * `streamlit` (for deployment/visualization)
 
 ---
 
